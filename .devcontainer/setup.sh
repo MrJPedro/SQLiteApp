@@ -5,8 +5,11 @@ SDK_ROOT=/usr/local/lib/android/sdk
 CMDLINE_TOOLS_ZIP=/tmp/cmdline-tools.zip
 
 echo ">>> Installing dependencies..."
-apt-get update -y
-apt-get install -y openjdk-17-jdk wget unzip
+apk update
+apk add --no-cache openjdk17 wget unzip bash
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
 
 echo ">>> Installing Android SDK command-line tools..."
 mkdir -p "$SDK_ROOT/cmdline-tools"
