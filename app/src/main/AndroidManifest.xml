@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLiteApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".controllers.SecondaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
