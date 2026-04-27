@@ -1,0 +1,19 @@
+{
+  "name": "Android Dev API 29",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "containerEnv": {
+    "ANDROID_HOME": "/usr/local/lib/android/sdk",
+    "ANDROID_SDK_ROOT": "/usr/local/lib/android/sdk",
+    "PATH": "/usr/local/lib/android/sdk/platform-tools:/usr/local/lib/android/sdk/cmdline-tools/latest/bin:${PATH}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mathiasfrohlich.Kotlin",
+        "redhat.java",
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}
