@@ -1,6 +1,6 @@
 {
   "name": "Android Dev API 29",
-  "image": "mcr.microsoft.com/devcontainers/java:17-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "containerEnv": {
     "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
