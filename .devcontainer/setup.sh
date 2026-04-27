@@ -4,6 +4,10 @@ set -euo pipefail
 SDK_ROOT=/usr/local/lib/android/sdk
 CMDLINE_TOOLS_ZIP=/tmp/cmdline-tools.zip
 
+echo ">>> Installing dependencies..."
+apt-get update -y
+apt-get install -y openjdk-17-jdk wget unzip
+
 echo ">>> Installing Android SDK command-line tools..."
 mkdir -p "$SDK_ROOT/cmdline-tools"
 
@@ -15,7 +19,7 @@ mv "$SDK_ROOT/cmdline-tools/cmdline-tools" "$SDK_ROOT/cmdline-tools/latest"
 rm "$CMDLINE_TOOLS_ZIP"
 
 echo ">>> Accepting licenses..."
-sdkmanager --sdk_root="$SDK_ROOT" --licenses <<< $(yes)
+yes | sdkmanager --sdk_root="$SDK_ROOT" --licenses
 
 echo ">>> Installing SDK packages..."
 sdkmanager --sdk_root="$SDK_ROOT" \
