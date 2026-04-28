@@ -43,11 +43,6 @@ class MainActivity : AppCompatActivity() {
             val veiculo = adapterView.getItemAtPosition(position) as VeiculoModel
             val intent = Intent(this, SecondaryActivity::class.java)
 
-            //intent.putExtra("Veiculo_Id", veiculo.id)
-            //intent.putExtra("Veiculo_Nome", veiculo.nome)
-            //intent.putExtra("Veiculo_Tipo", veiculo.tipo)
-            //intent.putExtra("Veiculo_Cor", veiculo.cor)
-            //intent.putExtra("Veiculo_Preco", veiculo.preco)
             intent.putExtra("Veiculo", veiculo)
 
             startActivity(intent)

@@ -82,7 +82,7 @@
         android:id="@+id/precoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valor da Diária (R$):"
+        android:text="Valor do Veículo (R$):"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
         android:layout_marginTop="16dp" />
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Ex: 150" />
+            android:hint="Ex: 45000" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout

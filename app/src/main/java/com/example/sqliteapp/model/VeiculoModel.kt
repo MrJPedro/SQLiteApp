@@ -1,5 +1,7 @@
 package com.example.sqliteapp.model
+
 import java.io.Serializable
+
 data class VeiculoModel(
     var id: Int,
     var tipo: String,
@@ -9,6 +11,6 @@ data class VeiculoModel(
 ): Serializable {
 
     override fun toString(): String {
-        return nome
+        return "$nome - R$ $preco"
     }
 }
