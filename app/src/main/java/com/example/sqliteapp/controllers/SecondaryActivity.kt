@@ -59,20 +59,33 @@ class SecondaryActivity : AppCompatActivity() {
     }
 
     fun salvarVeiculo(view: View) {
-        val nome = tilNome.editText?.text.toString()
+        val nome = tilNome.editText?.text.toString().trim()
         val tipo = spTipo.selectedItem?.toString() ?: "Carro"
         val cor = spCor.selectedItem?.toString() ?: "Branco"
-        val precoStr = tilPreco.editText?.text.toString()
+        val precoStr = tilPreco.editText?.text.toString().trim()
 
         if (nome.isBlank()) {
-            Toast.makeText(this, "Nome é obrigatório", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "O nome do veículo é obrigatório", Toast.LENGTH_SHORT).show()
             tilNome.editText?.requestFocus()
             return
         }
 
-        val preco = precoStr.toIntOrNull() ?: 0
-        if (preco <= 0) {
-            Toast.makeText(this, "Preço inválido", Toast.LENGTH_SHORT).show()
+        if (nome.length < 2 || nome.length > 50) {
+            Toast.makeText(this, "O nome deve ter entre 2 e 50 caracteres", Toast.LENGTH_SHORT).show()
+            tilNome.editText?.requestFocus()
+            return
+        }
+
+        if (precoStr.isBlank()) {
+            Toast.makeText(this, "O preço do veículo é obrigatório", Toast.LENGTH_SHORT).show()
+            tilPreco.editText?.requestFocus()
+            return
+        }
+
+        val preco = precoStr.toIntOrNull()
+
+        if (preco == null || preco <= 0) {
+            Toast.makeText(this, "Insira um valor numérico positivo para o preço", Toast.LENGTH_SHORT).show()
             tilPreco.editText?.requestFocus()
             return
         }
