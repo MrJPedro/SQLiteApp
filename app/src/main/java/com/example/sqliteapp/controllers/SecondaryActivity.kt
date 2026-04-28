@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,25 @@ class SecondaryActivity : AppCompatActivity() {
             insets
         }
 
-        dao = VeiculoDAO(this)
+        /*val bundle = intent.extras
+        var veiculo: VeiculoModel = VeiculoModel(0, "", "", 0, "")
+        if (bundle != null) {
+
+            veiculo.id = intent.getIntExtra("Veiculo_Id", 0)
+            veiculo.nome = intent.getStringExtra("Veiculo_Nome")
+            var veiculoTipo = intent.getStringExtra("Veiculo_Tipo")
+        }*/
+
+        /*val veiculo = intent.getSerializableExtra("Veiculo") as? VeiculoModel
+
+        val tituloVeiculoTextView = findViewById<TextView>(R.id.tituloVeiculoTextView)
+
+        if (veiculo != null) {
+            val tituloVeiculoTextView = findViewById<TextView>(R.id.tituloVeiculoTextView)
+
+        }*/
+
+        var dao = VeiculoDAO(this)
 
         tilNome = findViewById(R.id.textInputLayout2)
         spTipo = findViewById(R.id.spinner)

@@ -1,12 +1,12 @@
 package com.example.sqliteapp.model
-
+import java.io.Serializable
 data class VeiculoModel(
-    val id: Int = 0,
-    val tipo: String,
-    val nome: String,
-    val preco: Int,
-    val cor: String
-){
+    var id: Int,
+    var tipo: String,
+    var nome: String,
+    var preco: Int,
+    var cor: String
+): Serializable {
 
     override fun toString(): String {
         return nome
