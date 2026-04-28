@@ -19,7 +19,7 @@ class DBHelper(context: Context) :
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 NOME TEXT NOT NULL,
                 TIPO TEXT NOT NULL,
-                COR TEXT NOT NULL
+                COR TEXT NOT NULL,
                 PRECO INTEGER NOT NULL
             )
         """.trimIndent()

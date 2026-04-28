@@ -1,7 +1,7 @@
 package com.example.sqliteapp.model
 
 data class VeiculoModel(
-    val id: int = 0,
+    val id: Int = 0,
     val tipo: String,
     val nome: String,
     val preco: Int,

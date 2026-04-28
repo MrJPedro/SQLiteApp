@@ -32,7 +32,7 @@ class VeiculoDAO(private val context: Context) {
             val tipo = cursor.getString(cursor.getColumnIndexOrThrow("TIPO"))
             val cor = cursor.getString(cursor.getColumnIndexOrThrow("COR"))
             val preco = cursor.getInt(cursor.getColumnIndexOrThrow("PRECO"))
-            veiculoList.add(VeiculoModel(id, nome, tipo, cor, preco))
+            veiculoList.add(VeiculoModel(id, tipo, nome, preco, cor))
         }
         cursor.close()
         db.close()
@@ -52,7 +52,7 @@ class VeiculoDAO(private val context: Context) {
             val tipo = cursor.getString(cursor.getColumnIndexOrThrow("TIPO"))
             val cor = cursor.getString(cursor.getColumnIndexOrThrow("COR"))
             val preco = cursor.getInt(cursor.getColumnIndexOrThrow("PRECO"))
-            veiculo = VeiculoModel(id, nome, tipo, cor, preco)
+            veiculo = VeiculoModel(id, tipo, nome, preco, cor)
         }
         cursor.close()
         db.close()
