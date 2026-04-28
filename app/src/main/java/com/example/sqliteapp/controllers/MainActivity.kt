@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    fun newChar(view: View) {
+    fun novoVeiculo(view: View) {
         val intent = Intent(this, SecondaryActivity::class.java)
         startActivity(intent)
     }

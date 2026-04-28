@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0"
-        android:onClick="newChar"
+        android:onClick="novoVeiculo"
         android:text="Adicionar veículo" />
 </LinearLayout>
