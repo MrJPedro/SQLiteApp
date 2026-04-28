@@ -2,6 +2,7 @@ package com.example.sqliteapp.controllers
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -16,10 +17,11 @@ import com.google.android.material.textfield.TextInputLayout
 
 class SecondaryActivity : AppCompatActivity() {
 
-    private var tilNome: TextInputLayout? = null
-    private var spTipo: Spinner? = null
-    private var spCor: Spinner? = null
-    private var tilPreco: TextInputLayout? = null
+    private lateinit var tilNome: TextInputLayout
+    private lateinit var spTipo: Spinner
+    private lateinit var spCor: Spinner
+    private lateinit var tilPreco: TextInputLayout
+    private lateinit var btnExcluir: Button
 
     private lateinit var dao: VeiculoDAO
     private var veiculoId: Int = 0
@@ -41,42 +43,37 @@ class SecondaryActivity : AppCompatActivity() {
         tilNome = findViewById(R.id.textInputLayout2)
         spTipo = findViewById(R.id.spinner)
         spCor = findViewById(R.id.spinner2)
-
-        for (i in 0 until mainLayout.childCount) {
-            val view = mainLayout.getChildAt(i)
-            if (view is TextInputLayout && view.id != R.id.textInputLayout2) {
-                tilPreco = view
-                break
-            }
-        }
+        tilPreco = findViewById(R.id.textInputLayoutPreco)
+        btnExcluir = findViewById(R.id.btnExcluir)
 
         veiculoId = intent.getIntExtra("VEICULO_ID", 0)
 
         if (veiculoId != 0) {
             val veiculo = dao.getVeiculoById(veiculoId)
             if (veiculo != null) {
-                tilNome?.editText?.setText(veiculo.nome)
-                tilPreco?.editText?.setText(veiculo.preco.toString())
+                tilNome.editText?.setText(veiculo.nome)
+                tilPreco.editText?.setText(veiculo.preco.toString())
+                btnExcluir.visibility = View.VISIBLE
             }
         }
     }
 
     fun salvarVeiculo(view: View) {
-        val nome = tilNome?.editText?.text.toString()
-        val tipo = spTipo?.selectedItem?.toString() ?: ""
-        val cor = spCor?.selectedItem?.toString() ?: ""
-        val precoStr = tilPreco?.editText?.text.toString()
+        val nome = tilNome.editText?.text.toString()
+        val tipo = spTipo.selectedItem?.toString() ?: "Carro"
+        val cor = spCor.selectedItem?.toString() ?: "Branco"
+        val precoStr = tilPreco.editText?.text.toString()
 
         if (nome.isBlank()) {
             Toast.makeText(this, "Nome é obrigatório", Toast.LENGTH_SHORT).show()
-            tilNome?.editText?.requestFocus()
+            tilNome.editText?.requestFocus()
             return
         }
 
         val preco = precoStr.toIntOrNull() ?: 0
         if (preco <= 0) {
             Toast.makeText(this, "Preço inválido", Toast.LENGTH_SHORT).show()
-            tilPreco?.editText?.requestFocus()
+            tilPreco.editText?.requestFocus()
             return
         }
 
@@ -99,5 +96,9 @@ class SecondaryActivity : AppCompatActivity() {
             Toast.makeText(this, "Veículo excluído com sucesso!", Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    fun voltar(view: View) {
+        finish()
     }
 }
