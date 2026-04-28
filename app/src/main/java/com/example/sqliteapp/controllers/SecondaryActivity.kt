@@ -1,10 +1,11 @@
 package com.example.sqliteapp.controllers
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,9 @@ class SecondaryActivity : AppCompatActivity() {
     private lateinit var dao: VeiculoDAO
     private var veiculoId: Int = 0
 
+    private val listaTipos = arrayOf("CARRO", "MOTO", "VAN", "CAMINHÃO")
+    private val listaCores = arrayOf("BRANCO", "PRETO", "PRATA", "CINZA", "VERMELHO", "AZUL")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,25 +43,7 @@ class SecondaryActivity : AppCompatActivity() {
             insets
         }
 
-        /*val bundle = intent.extras
-        var veiculo: VeiculoModel = VeiculoModel(0, "", "", 0, "")
-        if (bundle != null) {
-
-            veiculo.id = intent.getIntExtra("Veiculo_Id", 0)
-            veiculo.nome = intent.getStringExtra("Veiculo_Nome")
-            var veiculoTipo = intent.getStringExtra("Veiculo_Tipo")
-        }*/
-
-        /*val veiculo = intent.getSerializableExtra("Veiculo") as? VeiculoModel
-
-        val tituloVeiculoTextView = findViewById<TextView>(R.id.tituloVeiculoTextView)
-
-        if (veiculo != null) {
-            val tituloVeiculoTextView = findViewById<TextView>(R.id.tituloVeiculoTextView)
-
-        }*/
-
-        var dao = VeiculoDAO(this)
+        dao = VeiculoDAO(this)
 
         tilNome = findViewById(R.id.textInputLayout2)
         spTipo = findViewById(R.id.spinner)
@@ -65,22 +51,40 @@ class SecondaryActivity : AppCompatActivity() {
         tilPreco = findViewById(R.id.textInputLayoutPreco)
         btnExcluir = findViewById(R.id.btnExcluir)
 
-        veiculoId = intent.getIntExtra("VEICULO_ID", 0)
+        val adapterTipo = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaTipos)
+        spTipo.adapter = adapterTipo
 
-        if (veiculoId != 0) {
-            val veiculo = dao.getVeiculoById(veiculoId)
-            if (veiculo != null) {
-                tilNome.editText?.setText(veiculo.nome)
-                tilPreco.editText?.setText(veiculo.preco.toString())
-                btnExcluir.visibility = View.VISIBLE
-            }
+        val adapterCor = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listaCores)
+        spCor.adapter = adapterCor
+
+        val veiculo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("Veiculo", VeiculoModel::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("Veiculo") as? VeiculoModel
+        }
+
+        if (veiculo != null) {
+            veiculoId = veiculo.id
+            tilNome.editText?.setText(veiculo.nome)
+            tilPreco.editText?.setText(veiculo.preco.toString())
+
+            val posicaoTipo = listaTipos.indexOf(veiculo.tipo)
+            if (posicaoTipo >= 0) spTipo.setSelection(posicaoTipo)
+
+            val posicaoCor = listaCores.indexOf(veiculo.cor)
+            if (posicaoCor >= 0) spCor.setSelection(posicaoCor)
+
+            btnExcluir.visibility = View.VISIBLE
+        } else {
+            btnExcluir.visibility = View.GONE
         }
     }
 
     fun salvarVeiculo(view: View) {
         val nome = tilNome.editText?.text.toString().trim()
-        val tipo = spTipo.selectedItem?.toString() ?: "Carro"
-        val cor = spCor.selectedItem?.toString() ?: "Branco"
+        val tipo = spTipo.selectedItem?.toString() ?: "CARRO"
+        val cor = spCor.selectedItem?.toString() ?: "BRANCO"
         val precoStr = tilPreco.editText?.text.toString().trim()
 
         if (nome.isBlank()) {
